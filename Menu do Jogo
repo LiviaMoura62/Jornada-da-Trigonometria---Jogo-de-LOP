@@ -1,0 +1,121 @@
+echo "# Jornada-da-Trigonometria---Jogo-de-LOP" >> README.md
+var ImagemEdu;
+var ImagemProg;
+
+var tela = 0;
+
+var LargBotao = 200;
+var AltBotao = 60;
+var yMin;
+var yMax= yMin+AltBotao;
+var xMinBotao = 150;
+var xMaxBotao = xMinBotao + LargBotao;
+
+var yMinBotao1 = 160;
+var yMaxBotao1 = yMinBotao1 + AltBotao;
+var yMinBotao2 = 250;
+var yMaxBotao2 = yMinBotao2 + AltBotao;
+var yMinBotao3 = 340;
+var yMaxBotao3 = yMinBotao3 + AltBotao;
+
+
+function BotaoMenu(título,yMin,yMax,OpçaoTela){
+if (mouseX > xMinBotao && mouseX < xMaxBotao && mouseY > yMin && mouseY < yMax){ 
+  fill(126,249,255);
+  if(mouseIsPressed){
+    tela=OpçaoTela;
+  }
+}
+  else{
+  fill(129,216,208);
+  }
+  rect(xMinBotao,yMin,LargBotao,AltBotao,20);
+  textSize(30);
+  fill(0)
+  text(título,xMinBotao+30,yMin+38);  
+  
+}
+
+
+function TeladaFase1(){
+  background(176,224,230);
+  textSize(40);
+  text("Fase 1",175,70);
+  textSize(18);
+  text("A primeira fase trabalhará a mudança de graus para radianos através de um pequeno jogo de memória. Essa fase tem como função preparar o estudante para conhecer de maneira dinâmica a diferença de representações dos ângulos do círculo trigonométrico. ", 40,190,415);
+}
+
+
+function TelaCreditos(){
+  background(176,224,230);
+  textSize(40);
+  text("Créditos",170,50);
+  textSize(25);
+  text("Glauco Cipriano",260,100);
+  textSize(18);
+  text("Função: Educador",260,130);
+  textSize(15);
+  text("Doutorado em Engenharia Elétrica pela Uiversidade Federal do Rio Grande do Norte. Técnico em Eletrônica pelo Instituto Federal do Rio Grande do Norte.",260,160,190);
+  textSize(25);
+  text("Lívia Moura",260,310);
+  textSize(18);
+  text("Função: Programadora",260,340);
+  textSize(15);
+  text("Discente do curso de Ciência e Tecnologia da Universidade Federal do Rio Grande do Norte.",260,370,190);
+  image(ImagemEdu,40,80);
+  image(ImagemProg,40,290);
+}
+
+
+function TelaInstruções(){
+  background(176,224,230);
+  textSize(50);
+  fill(0);
+  text("Instruções",132,60);
+  textSize(25);
+  fill(5);
+  text("Primeira instrução: leia atentamente as perguntas.",50,100,410);
+  textSize(25);
+  fill(5);
+  text("Segunda instrução: utilize o mouse para selecionar a alternativa correta.",50,180,408);
+  textSize(25);
+  fill(255,0,0);
+  text("AVISO!",200,290);
+  textSize(20);
+  fill(5);
+  text("Cada fase do jogo terá um comando específico. É importante estar atento às intruções da fase.",50,320,405);
+}
+
+
+function preload(){
+  ImagemEdu = loadImage("Foto educador.jpg");
+  ImagemProg = loadImage("Foto programador.jpg");  
+}
+
+
+function setup() {
+  createCanvas(500, 500);
+}
+
+
+function draw() {
+  if(tela==0){
+  background(176,224,230);
+  textSize(40);
+  fill(0);
+  text("Jornada da Trigonometria",20,90);
+  BotaoMenu("Instruções",yMinBotao1,yMaxBotao1,1);
+  BotaoMenu("Créditos",yMinBotao2,yMaxBotao2,2);
+  BotaoMenu("Jogar",yMinBotao3,yMaxBotao3,3);
+  }
+  if(tela==1){
+    TelaInstruções();
+  }
+  if(tela==2){
+    TelaCreditos();
+  }
+  if(tela==3){
+     TeladaFase1();
+  }  
+}
+
