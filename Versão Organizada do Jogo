@@ -1,0 +1,263 @@
+# Jornada-da-Trigonometria---Jogo-de-LOP
+var ImagemFundo;
+var ImagemEdu;
+var ImagemProg;
+var ImagemSeta;
+
+var tela = 0;
+
+var indiceCartaViradaUm;
+var cartaViradaDois;
+
+var cartasPareadas = [];
+var cartasID = [90, 180, 60, 45, 30, 60, 30, 90, 45, 180];
+var cartasValor = [];
+var cartasComparacao = [90, 180, 60, 45, 30, 60, 30, 90, 45, 180];
+var cartasX = [];
+var cartasY = [];
+var quantidadeCartas = 10;
+var cartaAltura = 80;
+var cartaLargura = 60;
+var viradas = [];
+
+var contagemTempo = false;
+var contTempo = 0;
+var contViradas = 0;
+
+var LargBotaoRetornar = 50;
+var AltBotaoRetornar = 50;
+var xMinBotaoRetornar = 430;
+var xMaxBotaoRetornar = xMinBotaoRetornar + LargBotaoRetornar;
+var yMinBotaoRetornar = 430;
+var yMaxBotaoRetornar = yMinBotaoRetornar + AltBotaoRetornar;
+
+var i;
+var letraX = [],
+  i;
+letraX[0] = 30;
+letraX[1] = 45;
+letraX[2] = 60;
+
+var LargBotao = 200;
+var AltBotao = 60;
+var yMin;
+var yMax = yMin + AltBotao;
+var xMinBotao = 150;
+var xMaxBotao = xMinBotao + LargBotao;
+
+var yMinBotao1 = 160;
+var yMaxBotao1 = yMinBotao1 + AltBotao;
+var yMinBotao2 = 250;
+var yMaxBotao2 = yMinBotao2 + AltBotao;
+var yMinBotao3 = 340;
+var yMaxBotao3 = yMinBotao3 + AltBotao;
+
+function BotaoMenu(título, yMin, yMax, OpçaoTela, i) {
+  if (mouseX > xMinBotao && mouseX < xMaxBotao && mouseY > yMin && mouseY < yMax) {
+    fill(126, 249, 255);
+    if (mouseIsPressed) {
+      tela = OpçaoTela;
+    }
+  } else {
+    fill(129, 216, 208);
+  }
+  rect(xMinBotao, yMin, LargBotao, AltBotao, 20);
+  textSize(30);
+  fill(0)
+  text(título, xMinBotao + letraX[i], yMin + 38);
+}
+
+function BotaoRetornar(yMinBotaoRetornar, yMaxBotaoRetornar, OpçaoTela) {
+  if (mouseX > xMinBotaoRetornar && mouseX < xMaxBotaoRetornar && mouseY > yMinBotaoRetornar && mouseY < yMaxBotaoRetornar) {
+    fill(126, 249, 255);
+    if (mouseIsPressed) {
+      tela = OpçaoTela;
+    }
+  } else {
+    fill(129, 216, 208);
+  }
+  rect(xMinBotaoRetornar, yMinBotaoRetornar, LargBotaoRetornar, AltBotaoRetornar, 10);
+  image(ImagemSeta, 440, 440);
+  fill(0);
+}
+
+function TelaCreditos() {
+  background(176, 224, 230);
+  textSize(40);
+  text("Créditos", 170, 50);
+  textSize(25);
+  text("Glauco Cipriano", 260, 100);
+  textSize(18);
+  text("Função: Educador", 260, 130);
+  textSize(15);
+  text("Doutorado em Engenharia Elétrica pela Uiversidade Federal do Rio Grande do Norte. Técnico em Eletrônica pelo Instituto Federal do Rio Grande do Norte.", 260, 160, 190);
+  textSize(25);
+  text("Lívia Moura", 260, 310);
+  textSize(18);
+  text("Função: Programadora", 260, 340);
+  textSize(15);
+  text("Discente do curso de Ciência e Tecnologia da Universidade Federal do Rio Grande do Norte.", 260, 370, 190);
+  image(ImagemEdu, 40, 80);
+  image(ImagemProg, 40, 290);
+  BotaoRetornar(yMinBotaoRetornar, yMaxBotaoRetornar, 0);
+}
+
+function TelaInstruções() {
+  background(176, 224, 230);
+  textSize(50);
+  fill(0);
+  text("Instruções", 132, 60);
+  textSize(25);
+  fill(5);
+  text("Primeira instrução: leia atentamente as perguntas.", 50, 100, 410);
+  textSize(25);
+  fill(5);
+  text("Segunda instrução: utilize o mouse para selecionar a alternativa correta.", 50, 180, 408);
+  textSize(25);
+  fill(255, 0, 0);
+  text("AVISO!", 200, 290);
+  textSize(20);
+  fill(5);
+  text("Cada fase do jogo terá um comando específico. É importante estar atento às intruções da fase.", 50, 320, 405);
+  BotaoRetornar(yMinBotaoRetornar, yMaxBotaoRetornar, 0);
+}
+
+function desviraCartas() {
+  for (i = 0; i < quantidadeCartas; i++) {
+    if (cartasPareadas[i] == false) {
+      viradas[i] = false;
+      contViradas = contViradas + 2;
+    }
+  }
+}
+
+function mouseReleased() {
+  for (i = 0; i < quantidadeCartas; i++) {
+    if (mouseX > cartasX[i] && mouseX < cartasX[i] + cartaLargura && mouseY > cartasY[i] && mouseY < cartasY[i] + cartaAltura) {
+      viradas[i] = !viradas[i];
+      contViradas = contViradas + 1.
+      contagemTempo = true;
+      if (contViradas == 1) {
+        indiceCartaViradaUm = i;
+      }
+      if (contViradas == 2) {
+        if (cartasID[indiceCartaViradaUm] == cartasID[i]) {
+          cartasPareadas[i] = true;
+          cartasPareadas[indiceCartaViradaUm] = true;
+          console.log(cartasID[i]);
+          viradas[i] = cartasPareadas[i];
+
+
+        }
+
+      }
+
+    }
+  }
+}
+
+function TeladaFase1() {
+  background(176, 224, 230);
+  textSize(35);
+  text("Fase 1", 195, 40);
+  textSize(17);
+  text("Agora você testará seus conhecimentos em transformações de graus para radianos através de um jogo da memória. Uma etapa fundamental da trigonometria! Lembre-se: 180° equivalem a 𝜋 em radianos.",50,60,400);
+  
+  for (i = 0; i < quantidadeCartas; i++) {
+    fill(126, 249, 255);
+    rect(cartasX[i], cartasY[i], cartaLargura, cartaAltura)
+    if (viradas[i] && contViradas < 3) {
+      contViradas = contViradas++;
+      image(cartasValor[i], cartasX[i], cartasY[i]);
+
+    }
+
+  }
+
+
+  if (contagemTempo) {
+    contTempo++;
+    if (contTempo > 70) {
+      contagemTempo = false;
+      desviraCartas();
+      contTempo = 0;
+      contViradas = 0;
+    }
+  }
+  if (contViradas > 10) {
+    viradas = true;
+  }
+
+
+  BotaoRetornar(yMinBotaoRetornar, yMaxBotaoRetornar, 0);
+}
+
+function preload() {
+  ImagemEdu = loadImage("Foto educador.jpg");
+  ImagemProg = loadImage("Foto programador.jpg");
+  ImagemFundo = loadImage("Plano de Fundo.jpg");
+  ImagemSeta = loadImage("Seta2.png");
+
+  cartasValor[0] = loadImage("90RAD.jpg");
+  cartasValor[1] = loadImage("180GRAUS.jpg");
+  cartasValor[2] = loadImage("60RAD.jpg");
+  cartasValor[3] = loadImage("45GRAUS.jpg");
+  cartasValor[4] = loadImage("30RAD.jpg");
+  cartasValor[5] = loadImage("60GRAUS.jpg");
+  cartasValor[6] = loadImage("30GRAUS.jpg");
+  cartasValor[7] = loadImage("90GRAUS.jpg");
+  cartasValor[8] = loadImage("45RAD.jpg");
+  cartasValor[9] = loadImage("180RAD.jpg");
+
+}
+
+function setup() {
+  createCanvas(500, 500);
+
+  frameRate(30);
+  //incremento = (350 - 50 ) / quantidadeCartas; 
+  incY = 120;
+  incX = 80;
+
+  xi = 60;
+  yi = 180;
+
+  for (i = 0; i < quantidadeCartas; i++) {
+    cartasX[i] = xi;
+    cartasY[i] = yi;
+    xi = xi + incX;
+    if (xi > 400) {
+      yi = yi + incY;
+      xi = 60;
+
+    }
+
+    viradas[i] = false;
+    cartasPareadas[i] = false;
+  }
+
+}
+
+function draw() {
+  if (tela == 0) {
+    background(ImagemFundo);
+    textSize(40);
+    fill(170, 216, 226);
+    rect(15, 50, 470, 60, 10)
+    fill(0);
+    textFont("Georgia");
+    text("Jornada da Trigonometria", 18, 90);
+    BotaoMenu("Instruções", yMinBotao1, yMaxBotao1, 1, 0);
+    BotaoMenu("Créditos", yMinBotao2, yMaxBotao2, 2, 1);
+    BotaoMenu("Jogar", yMinBotao3, yMaxBotao3, 3, 2);
+  }
+  if (tela == 1) {
+    TelaInstruções();
+  }
+  if (tela == 2) {
+    TelaCreditos();
+  }
+  if (tela == 3) {
+    TeladaFase1();
+  }
+}
